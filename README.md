@@ -1,2 +1,3 @@
-# Meta-AI-in-predicting-prices
-Meta-AI-in-predicting-prices project
+# MetaBit AI in predicting prices
+AI in predicting prices project
+LSTM and PINN

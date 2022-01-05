@@ -573,10 +573,10 @@
     <section class="section">
       <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Bar Chart</h5>
+              <h5 class="card-title">Top 10 lời khuyên khác</h5>
 
               <!-- Bar Chart -->
               <div id="barChart"></div>
@@ -585,8 +585,11 @@
                 document.addEventListener("DOMContentLoaded", () => {
                   new ApexCharts(document.querySelector("#barChart"), {
                     series: [{
-                      data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+                      name: "Mức chính xác %",
+                      data: [100, 95, 65, 64, 23, 11, 10, 5, 2, 0]
                     }],
+                    max: 100,
+                    min: 0,
                     chart: {
                       type: 'bar',
                       height: 350
@@ -601,8 +604,8 @@
                       enabled: false
                     },
                     xaxis: {
-                      categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-                        'United States', 'China', 'Germany'
+                      categories: ['Tích trữ', 'Mua thêm', 'Chuyển đổi', 'Bán từ từ', 'Nhập khẩu nước ngoài', 'Bán gấp',
+                       'Đầu tư sản phẩm khác', 'Rút vốn', 'Trốn nợ', 'Nghỉ kinh doanh cho lẹ'
                       ],
                     }
                   }).render();

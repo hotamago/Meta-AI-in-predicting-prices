@@ -594,6 +594,14 @@
                       type: 'bar',
                       height: 350
                     },
+                    yaxis: {
+                      min: (min) => {
+                        return min;
+                      },
+                      max: (max) => {
+                        return max;
+                      }
+                    },
                     plotOptions: {
                       bar: {
                         borderRadius: 4,

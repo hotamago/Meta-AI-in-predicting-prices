@@ -553,7 +553,7 @@
 
     <div v-show="nameProduct != 0">
 
-      <section class="section">
+      <section class="section dashboard">
         <div class="row">
 
           <div class="col-lg-12">
@@ -569,6 +569,74 @@
             </div>
           </div>
 
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+
+              <div class="card-body">
+                <h5 class="card-title">Data used <span>| 15 days</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-hdd-fill"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{ bigData }} GB</h6>
+                    <span class="text-success small pt-1 fw-bold">{{ pesentData }}%</span> <span class="text-muted small pt-2 ps-1">total Data</span>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
+
+              <div class="card-body">
+                <h5 class="card-title">Total time training <span>| 15 days data </span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-stopwatch-fill"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{ timeTraining }} Hour{{ (timeTraining > 1 ? 's' : '') }}</h6>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tổng quan training</h5>
+
+                <!-- Area Chart -->
+                <div id="trainingOverview"></div>
+                <!-- End Area Chart -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Nguồn data</h5>
+
+                <!-- Area Chart -->
+                <div id="sourceData"></div>
+                <!-- End Area Chart -->
+
+              </div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
   </main><!-- End #main -->
@@ -592,6 +660,9 @@
       el: '#main',
       data: {
         nameProduct: 0,
+        bigData: 0,
+        pesentData: 0,
+        timeTraining: 0,
         listData: [
           { name: 'Dưa hấu', price: { min: 8000, max: 10000 } },
           { name: 'Gạo', price: { min: 400, max: 10000 } },
@@ -606,18 +677,41 @@
         chart: {
           price: {
             values: []
+          },
+          sourceData: {
+            name: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+            values: []
+          },
+          trainingOverview: {
+            name: ['CPU', 'GPU', 'RAM', 'MAGIC', 'KwH', 'HUMAN', 'SOURCE'],
+            values: []
           }
         }
       },
       methods: {
         CreateNewGeneration: function () {
           {
+            this.bigData = getRndInteger(234, 693254);
+            this.pesentData = getRndInteger(1, 90);
+            this.timeTraining = getRndInteger(1, 100);
+          }
+          {
             var dataRandom = [];
             var elG;
             dataRandom = [];
             elG = this.listData[this.nameProduct - 1];
             for (var i = 1; i <= 20; i++) dataRandom.push(getRndInteger(elG.price.min, elG.price.max));
-            this.chart.price.value = dataRandom;
+            this.chart.price.values = dataRandom;
+          }
+          {
+            var dataRandom = [];
+            for (var i = 1; i <= 8; i++) dataRandom.push(getRndInteger(4000, 100000));
+            this.chart.sourceData.values = dataRandom;
+          }
+          {
+            var dataRandom = [];
+            for (var i = 1; i <= 7; i++) dataRandom.push(getRndInteger(1000, 50000));
+            this.chart.trainingOverview.values = dataRandom;
           }
         }
       },
@@ -630,7 +724,7 @@
           new ApexCharts(document.querySelector("#PriceChart"), {
             series: [{
               name: "vnđ",
-              data: elG.value
+              data: elG.values
             }],
             chart: {
               type: 'area',
@@ -643,7 +737,7 @@
               enabled: false
             },
             stroke: {
-              curve: 'straight'
+              curve: 'smooth'
             },
             subtitle: {
               text: 'Price Movements',
@@ -679,6 +773,36 @@
             },
             legend: {
               horizontalAlign: 'left'
+            }
+          }).render();
+        });
+        this.$nextTick(function () {
+          var elG = this.chart.sourceData;
+          new ApexCharts(document.querySelector("#sourceData"), {
+            series: elG.values,
+            chart: {
+              height: 350,
+              type: 'donut',
+              toolbar: {
+                show: true
+              }
+            },
+            labels: elG.name,
+          }).render();
+        });
+        this.$nextTick(function () {
+          var elG = this.chart.trainingOverview;
+          new ApexCharts(document.querySelector("#trainingOverview"), {
+            series: [{
+              name: 'unit',
+              data: elG.values,
+            }],
+            chart: {
+              height: 350,
+              type: 'radar',
+            },
+            xaxis: {
+              categories: elG.name
             }
           }).render();
         });

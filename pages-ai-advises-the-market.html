@@ -693,7 +693,7 @@
               if (dataRandomValue[i] >= 80 || i == 0) BestWhatToDo += dataRandomName[i] + (i < llk - 1 && dataRandomValue[i + 1] >= 80 ? ", " : ".");
               else break;
             }
-            this.chart.whatToDo.value = dataRandomValue;
+            this.chart.whatToDo.values = dataRandomValue;
             this.chart.whatToDo.name = dataRandomName;
             this.BestWhatToDo = BestWhatToDo;
           }
@@ -703,7 +703,7 @@
             dataRandom = [];
             elG = this.listData[this.nameProduct - 1];
             for (var i = 1; i <= 20; i++) dataRandom.push(getRndInteger(elG.price.min, elG.price.max));
-            this.chart.price.value = dataRandom;
+            this.chart.price.values = dataRandom;
           }
           {
             var numDisease = getRndInteger(1, 6);
@@ -733,7 +733,7 @@
           new ApexCharts(document.querySelector("#barChart"), {
             series: [{
               name: "Mức chính xác %",
-              data: elG.value
+              data: elG.values
             }],
             max: 100,
             min: 100,
@@ -768,7 +768,7 @@
           new ApexCharts(document.querySelector("#PriceChart"), {
             series: [{
               name: "vnđ",
-              data: elG.value
+              data: elG.values
             }],
             chart: {
               type: 'area',
@@ -781,7 +781,7 @@
               enabled: false
             },
             stroke: {
-              curve: 'straight'
+              curve: 'smooth'
             },
             subtitle: {
               text: 'Price Movements',
@@ -839,7 +839,7 @@
                 enabled: false
               },
               stroke: {
-                curve: 'straight'
+                curve: 'smooth'
               },
               subtitle: {
                 text: 'Disease Movements',

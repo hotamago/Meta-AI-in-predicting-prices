@@ -555,19 +555,23 @@
 
       <section class="section dashboard">
         <div class="row">
-
-          <div class="col-lg-12">
+          <div class="col-lg-6" v-for="(ele, index) in chart.diseases">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Giá dự đoán trong tương lai</h5>
+                <h5 class="card-title">{{ ele.name }}</h5>
 
                 <!-- Area Chart -->
-                <div id="PriceChart"></div>
+                <div v-bind:id="'DiseaseChart-' + index"></div>
                 <!-- End Area Chart -->
 
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="section dashboard">
+        <div class="row">
 
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card revenue-card">
@@ -581,7 +585,8 @@
                   </div>
                   <div class="ps-3">
                     <h6>{{ bigData }} GB</h6>
-                    <span class="text-success small pt-1 fw-bold">{{ pesentData }}%</span> <span class="text-muted small pt-2 ps-1">total Data</span>
+                    <span class="text-success small pt-1 fw-bold">{{ pesentData }}%</span> <span
+                      class="text-muted small pt-2 ps-1">total Data</span>
 
                   </div>
                 </div>
@@ -699,9 +704,7 @@
           { name: 'Lợn', price: { min: 400, max: 10000 } }
         ],
         chart: {
-          price: {
-            values: []
-          },
+          diseases: [],
           sourceData: {
             name: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
             values: []
@@ -721,12 +724,20 @@
             this.LossValue = getRndFoat(2, 5);
           }
           {
-            var dataRandom = [];
-            var elG;
-            dataRandom = [];
-            elG = this.listData[this.nameProduct - 1];
-            for (var i = 1; i <= 20; i++) dataRandom.push(getRndInteger(elG.price.min, elG.price.max));
-            this.chart.price.values = dataRandom;
+            var numDisease = getRndInteger(1, 6);
+            var nameDisease = [["Tả", "Tiêu chảy", "Quần què", "Lá cháy", "Ảo phim"], ["Siêu sâu", "Sâu đuôi dài", "Sâu wibu", "Sâu loli", "Sâu anime"]];
+            var nameList = ["Dự đoán dịch bệnh: ", "Dự đoán sâu bệnh: "];
+            var snameList = ["tỷ lệ bệnh (%)", "mật độ sâu (c/m2)"];
+            var minmaxList = [{ min: 0, max: 100 }, { min: 0, max: 1000 }];
+            var diseases = [];
+            for (var i = 0; i < numDisease; i++) {
+              var TypeDisease = getRndInteger(0, 1);
+              var nameFinal = nameList[TypeDisease] + nameDisease[TypeDisease][getRndInteger(0, nameDisease[TypeDisease].length - 1)];
+              var newElement = { name: nameFinal, sname: snameList[TypeDisease], values: [] };
+              for (var j = 1; j <= 20; j++) newElement.values.push(getRndInteger(minmaxList[TypeDisease].min, minmaxList[TypeDisease].max));
+              diseases.push(newElement);
+            }
+            this.chart.diseases = diseases;
           }
           {
             var dataRandom = [];
@@ -747,61 +758,63 @@
           document.querySelector("#trainingOverview").innerHTML = "";
         });
         this.$nextTick(function () {
-          var elG = this.chart.price;
-          new ApexCharts(document.querySelector("#PriceChart"), {
-            series: [{
-              name: "vnđ",
-              data: elG.values
-            }],
-            chart: {
-              type: 'area',
-              height: 350,
-              zoom: {
+          var elG = this.chart.diseases;
+          for (var i = 0; i < elG.length; i++) {
+            new ApexCharts(document.querySelector("#DiseaseChart-" + i), {
+              series: [{
+                name: elG[i].sname,
+                data: elG[i].values
+              }],
+              chart: {
+                type: 'area',
+                height: 350,
+                zoom: {
+                  enabled: false
+                }
+              },
+              dataLabels: {
                 enabled: false
+              },
+              stroke: {
+                curve: 'smooth'
+              },
+              subtitle: {
+                text: 'Disease Movements',
+                align: 'left'
+              },
+              labels: [
+                "13 Nov 2017",
+                "14 Nov 2017",
+                "15 Nov 2017",
+                "16 Nov 2017",
+                "17 Nov 2017",
+                "20 Nov 2017",
+                "21 Nov 2017",
+                "22 Nov 2017",
+                "23 Nov 2017",
+                "24 Nov 2017",
+                "27 Nov 2017",
+                "28 Nov 2017",
+                "29 Nov 2017",
+                "30 Nov 2017",
+                "01 Dec 2017",
+                "04 Dec 2017",
+                "05 Dec 2017",
+                "06 Dec 2017",
+                "07 Dec 2017",
+                "08 Dec 2017"
+              ],
+              xaxis: {
+                type: 'datetime',
+              },
+              yaxis: {
+                opposite: true
+              },
+              legend: {
+                horizontalAlign: 'left'
               }
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              curve: 'smooth'
-            },
-            subtitle: {
-              text: 'Price Movements',
-              align: 'left'
-            },
-            labels: [
-              "13 Nov 2017",
-              "14 Nov 2017",
-              "15 Nov 2017",
-              "16 Nov 2017",
-              "17 Nov 2017",
-              "20 Nov 2017",
-              "21 Nov 2017",
-              "22 Nov 2017",
-              "23 Nov 2017",
-              "24 Nov 2017",
-              "27 Nov 2017",
-              "28 Nov 2017",
-              "29 Nov 2017",
-              "30 Nov 2017",
-              "01 Dec 2017",
-              "04 Dec 2017",
-              "05 Dec 2017",
-              "06 Dec 2017",
-              "07 Dec 2017",
-              "08 Dec 2017"
-            ],
-            xaxis: {
-              type: 'datetime',
-            },
-            yaxis: {
-              opposite: true
-            },
-            legend: {
-              horizontalAlign: 'left'
-            }
-          }).render();
+            }).render();
+          }
         });
         this.$nextTick(function () {
           var elG = this.chart.sourceData;

@@ -628,6 +628,9 @@
     function getRndInteger(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    function getRndFoat(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) * 1000) / 1000 + min;
+    }
     var vm = new Vue({
       el: '#main',
       data: {

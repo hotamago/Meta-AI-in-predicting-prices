@@ -610,26 +610,6 @@
             </div>
           </div>
 
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card customers-card">
-
-              <div class="card-body">
-                <h5 class="card-title">LOSS <span>| 15 days </span></h5>
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-stopwatch-fill"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ LossValue }} %</h6>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
@@ -676,9 +656,6 @@
     function getRndInteger(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    function getRndFoat(min, max) {
-      return Math.random() * (max - min + 1) + min;
-    }
     var vm = new Vue({
       el: '#main',
       data: {
@@ -686,7 +663,6 @@
         bigData: 0,
         pesentData: 0,
         timeTraining: 0,
-        LossValue: 0,
         listData: [
           { name: 'Dưa hấu', price: { min: 8000, max: 10000 } },
           { name: 'Gạo', price: { min: 400, max: 10000 } },
@@ -718,7 +694,6 @@
             this.bigData = getRndInteger(234, 693254);
             this.pesentData = getRndInteger(1, 90);
             this.timeTraining = getRndInteger(1, 100);
-            this.LossValue = getRndFoat(2, 5);
           }
           {
             var dataRandom = [];

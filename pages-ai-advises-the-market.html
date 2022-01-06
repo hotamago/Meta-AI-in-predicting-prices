@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +30,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Vuejs -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.0
@@ -529,20 +534,11 @@
               <form>
                 <div class="row mb-3">
                   <div class="col-sm-4">
-                    <select class="form-select" aria-label="Select name">
-                      <option value="1">Dưa hấu</option>
-                      <option value="2">Gạo</option>
-                      <option value="3">Ngô</option>
-                      <option value="3">Sắn</option>
-                      <option value="3">Nho</option>
-                      <option value="3">Nhãn</option>
-                      <option value="3">Đào</option>
-                      <option value="3">Gà</option>
-                      <option value="3">Lợn</option>
+                    <select class="form-select" aria-label="Select name" v-model="nameProduct"
+                      v-on:change="CreateNewGeneration">
+                      <option v-for="(ele, index) in listData" :key="index" :item="ele" :index="index"
+                        v-bind:value="index + 1">{{ele.name}}</option>
                     </select>
-                  </div>
-                  <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary">Go</button>
                   </div>
                 </div>
 
@@ -555,450 +551,65 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg">
+    <div v-show="nameProduct != 0">
+      <section class="section">
+        <div class="row">
+          <div class="col-lg">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-patch-check"></i> Lời khuyên được đánh giá cao nhất</h5>
-              <p>Không bán sản phẩm đợi giá lên, mua thêm sản phẩm vì thị trường sẽ tăng giá</p>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-patch-check"></i> Lời khuyên được đánh giá cao nhất</h5>
+                <p>{{ BestWhatToDo }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Top 10 lời khuyên khác</h5>
+
+                <!-- Bar Chart -->
+                <div id="barChart"></div>
+                <!-- End Bar Chart -->
+
+              </div>
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Giá dự đoán trong tương lai</h5>
 
-    <section class="section">
-      <div class="row">
+                <!-- Area Chart -->
+                <div id="PriceChart"></div>
+                <!-- End Area Chart -->
 
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Top 10 lời khuyên khác</h5>
-
-              <!-- Bar Chart -->
-              <div id="barChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#barChart"), {
-                    series: [{
-                      name: "Mức chính xác %",
-                      data: [100, 95, 65, 64, 23, 11, 10, 5, 2, 0]
-                    }],
-                    max: 100,
-                    min: 0,
-                    chart: {
-                      type: 'bar',
-                      height: 350
-                    },
-                    yaxis: {
-                      min: (min) => {
-                        return min;
-                      },
-                      max: (max) => {
-                        return max;
-                      }
-                    },
-                    plotOptions: {
-                      bar: {
-                        borderRadius: 4,
-                        horizontal: true,
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    xaxis: {
-                      categories: ['Tích trữ', 'Mua thêm', 'Chuyển đổi', 'Bán từ từ', 'Nhập khẩu nước ngoài', 'Bán gấp',
-                       'Đầu tư sản phẩm khác', 'Rút vốn', 'Trốn nợ', 'Nghỉ kinh doanh cho lẹ'
-                      ],
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Bar Chart -->
-
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Giá dự đoán trong tương lai</h5>
+          <div class="col-lg-6" v-for="(ele, index) in chart.diseases">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ ele.name }}</h5>
 
-              <!-- Area Chart -->
-              <div id="PriceChart"></div>
+                <!-- Area Chart -->
+                <div v-bind:id="'DiseaseChart-' + index"></div>
+                <!-- End Area Chart -->
 
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#PriceChart"), {
-                    series: [{
-                      name: "vnđ",
-                      data: [
-                        8107.85,
-                        8128.0,
-                        8122.9,
-                        8165.5,
-                        8340.7,
-                        8423.7,
-                        8423.5,
-                        8514.3,
-                        8481.85,
-                        8487.7,
-                        8506.9,
-                        8626.2,
-                        8668.95,
-                        8602.3,
-                        8607.55,
-                        8512.9,
-                        8496.25,
-                        8600.65,
-                        8881.1,
-                        9340.85
-                      ]
-                    }],
-                    chart: {
-                      type: 'area',
-                      height: 350,
-                      zoom: {
-                        enabled: false
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    subtitle: {
-                      text: 'Price Movements',
-                      align: 'left'
-                    },
-                    labels: [
-                        "13 Nov 2017",
-                        "14 Nov 2017",
-                        "15 Nov 2017",
-                        "16 Nov 2017",
-                        "17 Nov 2017",
-                        "20 Nov 2017",
-                        "21 Nov 2017",
-                        "22 Nov 2017",
-                        "23 Nov 2017",
-                        "24 Nov 2017",
-                        "27 Nov 2017",
-                        "28 Nov 2017",
-                        "29 Nov 2017",
-                        "30 Nov 2017",
-                        "01 Dec 2017",
-                        "04 Dec 2017",
-                        "05 Dec 2017",
-                        "06 Dec 2017",
-                        "07 Dec 2017",
-                        "08 Dec 2017"
-                      ],
-                    xaxis: {
-                      type: 'datetime',
-                    },
-                    yaxis: {
-                      opposite: true
-                    },
-                    legend: {
-                      horizontalAlign: 'left'
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Area Chart -->
-
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Dự đoán dịch bệnh A</h5>
-
-              <!-- Area Chart -->
-              <div id="DiseaseChart1"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#DiseaseChart1"), {
-                    series: [{
-                      name: "tỷ lệ bệnh (%)",
-                      data: [
-                        73,
-                        21,
-                        64,
-                        12,
-                        88,
-                        23,
-                        44,
-                        66,
-                        67,
-                        22,
-                        99,
-                        63,
-                        12,
-                        1,
-                        2,
-                        45,
-                        100,
-                        67,
-                        99,
-                        75.4
-                      ]
-                    }],
-                    chart: {
-                      type: 'area',
-                      height: 350,
-                      zoom: {
-                        enabled: false
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    subtitle: {
-                      text: 'Disease Movements',
-                      align: 'left'
-                    },
-                    labels: [
-                        "13 Nov 2017",
-                        "14 Nov 2017",
-                        "15 Nov 2017",
-                        "16 Nov 2017",
-                        "17 Nov 2017",
-                        "20 Nov 2017",
-                        "21 Nov 2017",
-                        "22 Nov 2017",
-                        "23 Nov 2017",
-                        "24 Nov 2017",
-                        "27 Nov 2017",
-                        "28 Nov 2017",
-                        "29 Nov 2017",
-                        "30 Nov 2017",
-                        "01 Dec 2017",
-                        "04 Dec 2017",
-                        "05 Dec 2017",
-                        "06 Dec 2017",
-                        "07 Dec 2017",
-                        "08 Dec 2017"
-                      ],
-                    xaxis: {
-                      type: 'datetime',
-                    },
-                    yaxis: {
-                      opposite: true
-                    },
-                    legend: {
-                      horizontalAlign: 'left'
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Area Chart -->
-
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Dự đoán dịch bệnh B</h5>
-
-              <!-- Area Chart -->
-              <div id="DiseaseChart2"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#DiseaseChart2"), {
-                    series: [{
-                      name: "tỷ lệ bệnh (%)",
-                      data: [
-                        11,
-                        12,
-                        6,
-                        4,
-                        2,
-                        3,
-                        1,
-                        2,
-                        3,
-                        4,
-                        14,
-                        35,
-                        67,
-                        98,
-                        100,
-                        100,
-                        100,
-                        67,
-                        45,
-                        75.4
-                      ]
-                    }],
-                    chart: {
-                      type: 'area',
-                      height: 350,
-                      zoom: {
-                        enabled: false
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    subtitle: {
-                      text: 'Disease Movements',
-                      align: 'left'
-                    },
-                    labels: [
-                        "13 Nov 2017",
-                        "14 Nov 2017",
-                        "15 Nov 2017",
-                        "16 Nov 2017",
-                        "17 Nov 2017",
-                        "20 Nov 2017",
-                        "21 Nov 2017",
-                        "22 Nov 2017",
-                        "23 Nov 2017",
-                        "24 Nov 2017",
-                        "27 Nov 2017",
-                        "28 Nov 2017",
-                        "29 Nov 2017",
-                        "30 Nov 2017",
-                        "01 Dec 2017",
-                        "04 Dec 2017",
-                        "05 Dec 2017",
-                        "06 Dec 2017",
-                        "07 Dec 2017",
-                        "08 Dec 2017"
-                      ],
-                    xaxis: {
-                      type: 'datetime',
-                    },
-                    yaxis: {
-                      opposite: true
-                    },
-                    legend: {
-                      horizontalAlign: 'left'
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Area Chart -->
-
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Dự đoán sâu bệnh C</h5>
-
-              <!-- Area Chart -->
-              <div id="DiseaseChart3"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#DiseaseChart3"), {
-                    series: [{
-                      name: "mật độ sâu (c/m2)",
-                      data: [
-                        23,
-                        65,
-                        112,
-                        435,
-                        66,
-                        52,
-                        236,
-                        66,
-                        73,
-                        1,
-                        23,
-                        63,
-                        23,
-                        1,
-                        2,
-                        53,
-                        12,
-                        3,
-                        16,
-                        11
-                      ]
-                    }],
-                    chart: {
-                      type: 'area',
-                      height: 350,
-                      zoom: {
-                        enabled: false
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    subtitle: {
-                      text: 'Disease Movements',
-                      align: 'left'
-                    },
-                    labels: [
-                        "13 Nov 2017",
-                        "14 Nov 2017",
-                        "15 Nov 2017",
-                        "16 Nov 2017",
-                        "17 Nov 2017",
-                        "20 Nov 2017",
-                        "21 Nov 2017",
-                        "22 Nov 2017",
-                        "23 Nov 2017",
-                        "24 Nov 2017",
-                        "27 Nov 2017",
-                        "28 Nov 2017",
-                        "29 Nov 2017",
-                        "30 Nov 2017",
-                        "01 Dec 2017",
-                        "04 Dec 2017",
-                        "05 Dec 2017",
-                        "06 Dec 2017",
-                        "07 Dec 2017",
-                        "08 Dec 2017"
-                      ],
-                    xaxis: {
-                      type: 'datetime',
-                    },
-                    yaxis: {
-                      opposite: true
-                    },
-                    legend: {
-                      horizontalAlign: 'left'
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Area Chart -->
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
+      </section>
 
   </main><!-- End #main -->
 
@@ -1009,7 +620,268 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vuejs -->
+  <script>
+    function getRndInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    var vm = new Vue({
+      el: '#main',
+      data: {
+        nameProduct: 0,
+        listData: [
+          { name: 'Dưa hấu', price: { min: 8000, max: 10000 } },
+          { name: 'Gạo', price: { min: 400, max: 10000 } },
+          { name: 'Ngô', price: { min: 400, max: 800 } },
+          { name: 'Sắn', price: { min: 100000, max: 500000 } },
+          { name: 'Nho', price: { min: 4000, max: 7000 } },
+          { name: 'Nhãn', price: { min: 50000, max: 80000 } },
+          { name: 'Đào', price: { min: 400, max: 500 } },
+          { name: 'Gà', price: { min: 30000, max: 300000 } },
+          { name: 'Lợn', price: { min: 400, max: 10000 } }
+        ],
+        BestWhatToDo: "",
+        whatToDo: [
+          "Tích trữ",
+          "Mua thêm trong nước",
+          "Nhập khẩu",
+          "Trốn nợ",
+          "Vượt biên giới",
+          "Nhập khẩu hàng nước ngoài",
+          "Nghỉ kinh doanh đi",
+          "Ôi bạn ơi",
+          "Phá sản",
+          "Bán từ từ",
+          "Tập trung vốn",
+          "Rải rác vốn",
+          "Đầu tư vào sản phẩm khác",
+          "Bán gấp rút",
+          "Mở rộng thương trường",
+          "Kêu gọi đầu tư",
+          "Chơi tất tay",
+          "Liều ăn nhiều"
+        ],
+        chart: {
+          whatToDo: {
+            values: [],
+            labels: []
+          },
+          price: {
+            values: []
+          },
+          diseases: []
+        }
+      },
+      methods: {
+        CreateNewGeneration: function () {
+          {
+            var dataRandom = [];
+            var dataRandomName = [], dataRandomValue = [];
+            var elG = this.whatToDo;
+            for (var i = 0; i < elG.length; i++) {
+              dataRandom.push({ name: elG[i], value: getRndInteger(0, 100) });
+            }
+            dataRandom.sort(function (a, b) { return b.value - a.value; });
+            var llk = Math.min(10, elG.length);
+            for (var i = 0; i < llk; i++) dataRandomName.push(dataRandom[i].name)
+            for (var i = 0; i < llk; i++) dataRandomValue.push(dataRandom[i].value)
+            var BestWhatToDo = "";
+            for (var i = 0; i < llk; i++) {
+              if (dataRandomValue[i] >= 80 || i == 0) BestWhatToDo += dataRandomName[i] + (i < llk - 1 && dataRandomValue[i + 1] >= 80 ? ", " : ".");
+              else break;
+            }
+            this.chart.whatToDo.value = dataRandomValue;
+            this.chart.whatToDo.name = dataRandomName;
+            this.BestWhatToDo = BestWhatToDo;
+          }
+          {
+            var dataRandom = [];
+            var elG;
+            dataRandom = [];
+            elG = this.listData[this.nameProduct - 1];
+            for (var i = 1; i <= 20; i++) dataRandom.push(getRndInteger(elG.price.min, elG.price.max));
+            this.chart.price.value = dataRandom;
+          }
+          {
+            var numDisease = getRndInteger(1, 6);
+            var nameDisease = [["Tả", "Tiêu chảy", "Quần què", "Lá cháy", "Ảo phim"], ["Siêu sâu", "Sâu đuôi dài", "Sâu wibu", "Sâu loli", "Sâu anime"]];
+            var nameList = ["Dự đoán dịch bệnh: ", "Dự đoán sâu bệnh: "];
+            var snameList = ["tỷ lệ bệnh (%)", "mật độ sâu (c/m2)"];
+            var minmaxList = [{ min: 0, max: 100 }, { min: 0, max: 1000 }];
+            var diseases = [];
+            for (var i = 0; i < numDisease; i++) {
+              var TypeDisease = getRndInteger(0, 1);
+              var nameFinal = nameList[TypeDisease] + nameDisease[TypeDisease][getRndInteger(0, nameDisease[TypeDisease].length - 1)];
+              var newElement = { name: nameFinal, sname: snameList[TypeDisease], values: [] };
+              for (var j = 1; j <= 20; j++) newElement.values.push(getRndInteger(minmaxList[TypeDisease].min, minmaxList[TypeDisease].max));
+              diseases.push(newElement);
+            }
+            this.chart.diseases = diseases;
+          }
+        }
+      },
+      updated: function () {
+        this.$nextTick(function () {
+          document.querySelector("#barChart").innerHTML = "";
+          document.querySelector("#PriceChart").innerHTML = "";
+        });
+        this.$nextTick(function () {
+          var elG = this.chart.whatToDo;
+          new ApexCharts(document.querySelector("#barChart"), {
+            series: [{
+              name: "Mức chính xác %",
+              data: elG.value
+            }],
+            max: 100,
+            min: 100,
+            chart: {
+              type: 'bar',
+              height: 350
+            },
+            yaxis: {
+              min: (min) => {
+                return min;
+              },
+              max: (max) => {
+                return max;
+              }
+            },
+            plotOptions: {
+              bar: {
+                borderRadius: 4,
+                horizontal: true,
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            xaxis: {
+              categories: elG.name,
+            }
+          }).render();
+        });
+        this.$nextTick(function () {
+          var elG = this.chart.price;
+          new ApexCharts(document.querySelector("#PriceChart"), {
+            series: [{
+              name: "vnđ",
+              data: elG.value
+            }],
+            chart: {
+              type: 'area',
+              height: 350,
+              zoom: {
+                enabled: false
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              curve: 'straight'
+            },
+            subtitle: {
+              text: 'Price Movements',
+              align: 'left'
+            },
+            labels: [
+              "13 Nov 2017",
+              "14 Nov 2017",
+              "15 Nov 2017",
+              "16 Nov 2017",
+              "17 Nov 2017",
+              "20 Nov 2017",
+              "21 Nov 2017",
+              "22 Nov 2017",
+              "23 Nov 2017",
+              "24 Nov 2017",
+              "27 Nov 2017",
+              "28 Nov 2017",
+              "29 Nov 2017",
+              "30 Nov 2017",
+              "01 Dec 2017",
+              "04 Dec 2017",
+              "05 Dec 2017",
+              "06 Dec 2017",
+              "07 Dec 2017",
+              "08 Dec 2017"
+            ],
+            xaxis: {
+              type: 'datetime',
+            },
+            yaxis: {
+              opposite: true
+            },
+            legend: {
+              horizontalAlign: 'left'
+            }
+          }).render();
+        });
+        this.$nextTick(function () {
+          var elG = this.chart.diseases;
+          for (var i = 0; i < elG.length; i++) {
+            new ApexCharts(document.querySelector("#DiseaseChart-" + i), {
+              series: [{
+                name: elG[i].sname,
+                data: elG[i].values
+              }],
+              chart: {
+                type: 'area',
+                height: 350,
+                zoom: {
+                  enabled: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'straight'
+              },
+              subtitle: {
+                text: 'Disease Movements',
+                align: 'left'
+              },
+              labels: [
+                "13 Nov 2017",
+                "14 Nov 2017",
+                "15 Nov 2017",
+                "16 Nov 2017",
+                "17 Nov 2017",
+                "20 Nov 2017",
+                "21 Nov 2017",
+                "22 Nov 2017",
+                "23 Nov 2017",
+                "24 Nov 2017",
+                "27 Nov 2017",
+                "28 Nov 2017",
+                "29 Nov 2017",
+                "30 Nov 2017",
+                "01 Dec 2017",
+                "04 Dec 2017",
+                "05 Dec 2017",
+                "06 Dec 2017",
+                "07 Dec 2017",
+                "08 Dec 2017"
+              ],
+              xaxis: {
+                type: 'datetime',
+              },
+              yaxis: {
+                opposite: true
+              },
+              legend: {
+                horizontalAlign: 'left'
+              }
+            }).render();
+          }
+        });
+      },
+    });
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

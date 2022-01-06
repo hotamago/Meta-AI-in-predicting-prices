@@ -718,6 +718,8 @@
       updated: function () {
         this.$nextTick(function () {
           document.querySelector("#PriceChart").innerHTML = "";
+          document.querySelector("#sourceData").innerHTML = "";
+          document.querySelector("#trainingOverview").innerHTML = "";
         });
         this.$nextTick(function () {
           var elG = this.chart.price;

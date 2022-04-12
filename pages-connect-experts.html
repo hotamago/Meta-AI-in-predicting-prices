@@ -34,285 +34,17 @@
   <!-- Vuejs -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">MetaBit</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="GET" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
-
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">2</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 2 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Đặt lịch thành công</h4>
-                <p>Chúc mừng! Bạn đã đặt lịch kết nối với chuyên gia thành công (14h ngày 7/1/2022)</p>
-                <p>30 mins. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Cập nhật kết quả dự báo</h4>
-                <p>MetaBit đã cập nhật kết quả dự báo ngày hôm nay!!!</p>
-                <p>1 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Client MetaBit</span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Client MetaBit</h6>
-              <span class="badge border-success border-1 text-success">VIP Member</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-ai-advises-the-market.html">
-          <i class="bi bi-layout-text-window-reverse"></i>
-          <span>AI tư vấn</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-ai-price-prediction.html">
-          <i class="bi bi-bar-chart"></i>
-          <span>Dự đoán giá thị trường</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-ai-disease-prediction.html">
-          <i class="bi bi-menu-button-wide"></i>
-          <span>Dự đoán dịch bệnh</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link " href="pages-connect-experts.html">
-          <i class="bi bi-gem"></i>
-          <span>Tìm kiếm chuyên gia</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-pricing.html">
-          <i class="bi bi-credit-card-2-back-fill"></i>
-          <span>Update tài khoản</span>
-        </a>
-      </li>
-
-      <li class="nav-heading">Pages</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
+  <div id="navbar"></div>
+	<script>
+		$("#navbar").load("navbar.html");
+	</script>
 
   <main id="main" class="main">
 
@@ -334,14 +66,14 @@
           <div class="card info-card revenue-card">
 
             <div class="card-body">
-              <h5 class="card-title">Số chuyên gia <span>| online</span></h5>
+              <h5 class="card-title">Number of experts <span>| online</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-check-circle-fill"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>{{ onlineExpert }} chuyên gia</h6>
+                  <h6>{{ onlineExpert }} expert</h6>
                 </div>
               </div>
             </div>
@@ -353,14 +85,14 @@
           <div class="card info-card sales-card">
 
             <div class="card-body">
-              <h5 class="card-title">Tổng chuyên gia <span>| all in metabit </span></h5>
+              <h5 class="card-title">Sum of experts <span>| all in metabit </span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-broadcast"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>{{ totalExpert }} chuyên gia</h6>
+                  <h6>{{ totalExpert }} expert</h6>
 
                 </div>
               </div>
@@ -373,7 +105,7 @@
           <div class="card info-card customers-card">
 
             <div class="card-body">
-              <h5 class="card-title">Tổng thời gian <span>| gọi, nhắn tin </span></h5>
+              <h5 class="card-title">Sum of time <span>| Call, messages </span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -418,12 +150,10 @@
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>MetaBit</span></strong>. All Rights Reserved
-    </div>
-  </footer><!-- End Footer -->
+  <div id="footer"></div>
+	<script>
+		$("#footer").load("footer.html");
+	</script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
@@ -444,23 +174,23 @@
         totalTime: 0,
         displayExpert: [],
         expert: [
-          {avatar: "https://i.imgur.com/LYpLuVr.jpg", name: "Nguyễn Ngọc Thủy", job: "Chủ tịc Egroup, Apax Holdings, APAX"},
-          {avatar: "https://i.imgur.com/NPC1ZyG.jpg", name: "Thái Vân Linh", job: "Tổng Giám Đốc Vingroup Ventures"},
-          {avatar: "https://i.imgur.com/yDn0hsr.jpg", name: "Nguyễn Xuân Phú", job: "Sáng lập/Chủ tịch HĐQT Tập đoàn Sunhouse"},
-          {avatar: "https://i.imgur.com/ZgTNc00.jpg", name: "Trần Anh Vương", job: "Chủ tịch HĐCQ Capella Việt Nam/Phó chủ tịch Hội Doanh nghiệp trẻ Việt Nam (YBA)"},
-          {avatar: "https://i.imgur.com/1WcYidI.jpg", name: "Nguyễn Hòa Bình", job: "Nhà sáng lập & Chủ tịch HĐQT Tập Đoàn NextTech"},
-          {avatar: "https://i.imgur.com/tbDljwt.jpg", name: "Shark Đỗ Liên", job: "Nhà sáng lập Ứng dụng Bảo hiểm công nghệ LIAN"},
-          {avatar: "https://i.imgur.com/ZmuHkGD.jpg", name: "Nguyễn Thanh Việt", job: "Chủ tịch HĐTV Tổ hợp Y tế Phương Đông, Chủ tịch HĐQT Intracom Group"},
-          {avatar: "https://i.imgur.com/fSidis0.jpg", name: "Phạm Thanh Hưng", job: "Phó Chủ tịch HĐQT CENGROUP, Phó Chủ tịch HĐQT Công ty CP Bất động sản Thế Kỷ (CENLAND)"},
-          {avatar: "https://i.imgur.com/rNYJZMl.jpg", name: "Nguyễn Mạnh Dũng", job: "Giám Đốc Quỹ đầu tư CyberAgent Việt Nam & Thái Lan"},
+          {avatar: "https://i.imgur.com/LYpLuVr.jpg", name: "Nguyễn Ngọc Thủy", job: "Chairperson Egroup, Apax Holdings, APAX"},
+          {avatar: "https://i.imgur.com/NPC1ZyG.jpg", name: "Thái Vân Linh", job: "CEO Vingroup Ventures"},
+          {avatar: "https://i.imgur.com/yDn0hsr.jpg", name: "Nguyễn Xuân Phú", job: "Founder/COB Sunhouse"},
+          {avatar: "https://i.imgur.com/ZgTNc00.jpg", name: "Trần Anh Vương", job: "COB Capella Vietnam/Vice President of Vietnam Young Entrepreneurs Association (YBA)"},
+          {avatar: "https://i.imgur.com/1WcYidI.jpg", name: "Nguyễn Hòa Bình", job: "Founder & COB NextTech"},
+          {avatar: "https://i.imgur.com/tbDljwt.jpg", name: "Shark Đỗ Liên", job: "Founder of Tech Insurance App LIAN"},
+          {avatar: "https://i.imgur.com/ZmuHkGD.jpg", name: "Nguyễn Thanh Việt", job: "Chairman of the Advisory Council of Oriental Medical Complex, COB Intracom Group"},
+          {avatar: "https://i.imgur.com/fSidis0.jpg", name: "Phạm Thanh Hưng", job: "Vice COB CENGROUP, COB Century Real Estate Joint Stock Company (CENLAND)"},
+          {avatar: "https://i.imgur.com/rNYJZMl.jpg", name: "Nguyễn Mạnh Dũng", job: "Director of CyberAgent Vietnam & Thailand Investment Fund"},
           {avatar: "https://i.imgur.com/vKZb7F0.jpg", name: "Sơn expert", job: "Developer MetaBit"},
           {avatar: "https://i.imgur.com/9v7RD3q.jpg", name: "Đạt expert", job: "Developer MetaBit"},
           {avatar: "https://i.imgur.com/T98Z9KB.jpg", name: "Huyền master", job: "Developer MetaBit"},
-          {avatar: "https://i.imgur.com/dTpk9IH.jpg", name: "Louis Nguyễn", job: "Chủ Tịch HĐQT & Tổng giám đốc Cty Quản lý Quỹ Đầu Tư Saigon Asset Management (SAM). Giám đốc điều hành Sunwah Kingsway Vietnam"},
-          {avatar: "https://i.imgur.com/pJQXvYC.jpg", name: "Đặng Hồng Anh", job: "Phó chủ tịch Tập đoàn TTC/ Chủ tịch Công ty Đầu tư DHA."},
-          {avatar: "https://i.imgur.com/z6CPqKe.jpg", name: "Lê Đăng Khoa", job: "Nhà sáng lập du lịch sinh thái The Bamboo"},
-          {avatar: "https://i.imgur.com/dMeRGI9.jpg", name: "Trương Lý Hoàng Phi", job: "Tổng giám đốc Vintech City"},
-          {avatar: "https://i.imgur.com/zh1pDvU.jpg", name: "Phạm Duy Hiếu", job: "Tổng Giám Đốc ngân hàng TMCP An Bình"}
+          {avatar: "https://i.imgur.com/dTpk9IH.jpg", name: "Louis Nguyễn", job: "COB & CEO Investment Fund Management Company Saigon Asset Management (SAM). CEO Sunwah Kingsway Vietnam"},
+          {avatar: "https://i.imgur.com/pJQXvYC.jpg", name: "Đặng Hồng Anh", job: "Vice Chairman of TTC Group/ Chairman of DHA Investment Company."},
+          {avatar: "https://i.imgur.com/z6CPqKe.jpg", name: "Lê Đăng Khoa", job: "The Bamboo Ecotourism Founder"},
+          {avatar: "https://i.imgur.com/dMeRGI9.jpg", name: "Trương Lý Hoàng Phi", job: "CEO Vintech City"},
+          {avatar: "https://i.imgur.com/zh1pDvU.jpg", name: "Phạm Duy Hiếu", job: "CEO TMCP An Bình Bank"}
         ],
         chart: {
           
